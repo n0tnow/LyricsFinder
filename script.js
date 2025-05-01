@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const snackbarMessage = document.getElementById('snackbar-message');
     const snackbarClose = document.getElementById('snackbar-close');
     const twinklingStarsContainer = document.getElementById('twinkling-stars');
+    const downloadButton = document.getElementById('download-lyrics-button');
     
     // App State
     let isLoading = false;
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       backButton.addEventListener('click', handleBackFromLyrics);
       backToSearchButton.addEventListener('click', handleBackToSearch);
       snackbarClose.addEventListener('click', hideSnackbar);
+      downloadButton.addEventListener('click', downloadLyrics);
       
       // Create twinkling stars
       createTwinklingStars();
@@ -289,6 +291,42 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function hideSnackbar() {
       snackbar.className = snackbar.className.replace('show', '');
+    }
+    
+    /**
+     * Download lyrics as a text file
+     */
+    function downloadLyrics() {
+      if (!selectedSong || !lyricsText.textContent) {
+        showSnackbar('No lyrics available to download', 'warning');
+        return;
+      }
+      
+      const fileName = `${selectedSong.artist} - ${selectedSong.title}.txt`;
+      const fileContent = `${selectedSong.title}\nby ${selectedSong.artist}\n\n${lyricsText.textContent}`;
+      
+      // Create a blob with the text content
+      const blob = new Blob([fileContent], { type: 'text/plain' });
+      
+      // Create a temporary URL for the blob
+      const url = URL.createObjectURL(blob);
+      
+      // Create a temporary anchor element for downloading
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      
+      // Trigger a click on the anchor to start the download
+      a.click();
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+      
+      showSnackbar('Lyrics downloaded successfully', 'success');
     }
     
     /**
