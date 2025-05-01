@@ -64,8 +64,9 @@
     overflow: hidden;
     padding: 0.5rem 0;
     z-index: 2;
-    background: linear-gradient(to right, #1a237e, #311b92, #4a148c);
-    border-bottom: 1px solid rgba(131, 83, 235, 0.3);
+    background: linear-gradient(to right, #0ac2a3, #00b7ff, #04d0df);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   }
   
   .app-header::before {
@@ -114,7 +115,7 @@
     top: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, rgba(131, 83, 235, 0), rgba(131, 83, 235, 0.7), rgba(131, 83, 235, 0));
+    background: linear-gradient(to bottom, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.7), rgba(0, 229, 255, 0));
     display: none;
   }
   
@@ -125,7 +126,7 @@
     top: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, rgba(131, 83, 235, 0), rgba(131, 83, 235, 0.7), rgba(131, 83, 235, 0));
+    background: linear-gradient(to bottom, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.7), rgba(0, 229, 255, 0));
     display: none;
   }
   
@@ -385,14 +386,15 @@
   
   /* Current Search Banner */
   .current-search-banner {
-    background-color: rgba(0, 229, 255, 0.05);
+    background-color: rgba(0, 229, 255, 0.1);
     padding: 1rem;
     margin: 1.5rem 0 1rem;
     border-radius: 12px;
-    border: 1px solid rgba(0, 229, 255, 0.2);
+    border: 1px solid rgba(0, 229, 255, 0.3);
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   }
   
   .current-search-banner::before {
@@ -407,14 +409,17 @@
   
   .banner-label {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 229, 255, 0.9);
     margin-bottom: 0.2rem;
+    font-weight: 500;
   }
   
   .banner-text {
     display: flex;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .banner-text .icon {
@@ -624,12 +629,13 @@
     display: flex;
     align-items: center;
     padding: 1.5rem;
-    background: linear-gradient(45deg, #00e5ff 30%, #56fdff 90%);
+    background: linear-gradient(45deg, #00bcd4, #00e5ff, #26c6da);
     position: relative;
     overflow: hidden;
     color: white;
     border-radius: 12px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 229, 255, 0.3);
   }
   
   .song-header::before {
@@ -684,17 +690,19 @@
   
   .song-title {
     font-weight: bold;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     line-height: 1.2;
     font-size: 1.8rem;
+    letter-spacing: 0.5px;
   }
   
   .song-artist {
-    opacity: 0.85;
+    opacity: 0.9;
     display: flex;
     align-items: center;
     font-weight: normal;
     font-size: 1.2rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15);
   }
   
   .song-artist .icon {
@@ -711,23 +719,103 @@
   }
   
   .download-button {
-    padding: 0.5rem 1.2rem;
+    padding: 0.6rem 1.4rem;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.5);
     color: white;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .download-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
   }
   
   .download-button:hover {
-    background-color: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
+    background-color: rgba(255,255,255,0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .download-button:hover::before {
+    transform: translateX(100%);
+  }
+  
+  /* Star effect for download button */
+  .download-button .stars-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .download-button:hover .stars-container {
+    opacity: 1;
+  }
+  
+  .download-button .star {
+    position: absolute;
+    background-color: white;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  
+  .download-button:hover .star:nth-child(1) {
+    top: 20%;
+    left: 15%;
+    animation: star-twinkle 1.2s infinite 0.1s;
+  }
+  
+  .download-button:hover .star:nth-child(2) {
+    top: 30%;
+    left: 75%;
+    animation: star-twinkle 1.5s infinite 0.3s;
+  }
+  
+  .download-button:hover .star:nth-child(3) {
+    top: 70%;
+    left: 25%;
+    animation: star-twinkle 1.3s infinite 0.5s;
+  }
+  
+  .download-button:hover .star:nth-child(4) {
+    top: 60%;
+    left: 85%;
+    animation: star-twinkle 1.7s infinite 0.2s;
+  }
+  
+  .download-button:hover .star:nth-child(5) {
+    top: 40%;
+    left: 50%;
+    animation: star-twinkle 1.4s infinite 0.4s;
   }
   
   .download-button .icon {
@@ -1059,6 +1147,18 @@
     }
   }
   
+  @keyframes star-twinkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+      box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
+    }
+  }
+  
   @keyframes sparkle {
     0% {
       transform: rotate(0deg) scale(1);
@@ -1165,15 +1265,15 @@
   
   @keyframes pulse-glow {
     0% {
-      filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.4));
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
       transform: scale(1);
     }
     50% {
-      filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.8));
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
       transform: scale(1.1);
     }
     100% {
-      filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.4));
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
       transform: scale(1);
     }
   }
